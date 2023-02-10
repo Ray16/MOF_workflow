@@ -1,0 +1,16 @@
+uuid,molecule,fragments,linker,anchor_1,anchor_2,energy
+0,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.0351845144891
+1,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.04231018121337
+2,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.04231019269546
+3,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.05634739646905
+4,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.161872020821086
+5,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.16187202544523
+6,COc1cc(-c2nnc(-c3ccc(C(=O)[O-])cc3OC)nn2)ccc1C(=O)[O-],COc1cccc(C(=O)[O-])c1.COc1ccccc1C(=O)[O-],c1nncnn1,10,15,53.16575735894439
+7,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92215480875911
+8,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92216059406558
+9,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92401986408312
+10,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92401987436448
+11,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92401989381243
+12,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92402041987896
+13,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92402042250306
+14,O=C([O-])c1c(F)cc(-c2nnc(-c3c(F)c(F)c(C(=O)[O-])c(F)c3F)nn2)c(F)c1F,O=C([O-])c1c(F)c(F)cc(F)c1F.O=C([O-])c1c(F)ccc(F)c1F,c1nncnn1,8,20,51.92402043744842

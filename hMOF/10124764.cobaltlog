@@ -1,0 +1,26 @@
+Jobid: 10124764
+qsub -n 1 -t 60 -q single-gpu -A RAPINS -I
+Thu Feb 02 16:23:45 2023 +0000 (UTC) submitted with cwd set to: /lus/grand/projects/ACO2RDS/ruijie/DiffLinker_MOF/data/hMOF
+jobid 10124764 submitted from terminal /dev/pts/17
+Thu Feb 02 16:23:56 2023 +0000 (UTC) 
+Thu Feb 02 16:23:56 2023 +0000 (UTC) Command: '/usr/bin/ssh' 'thetagpu06-gpu1' '/usr/bin/cobalt-launcher.py' '--nf' '/var/tmp/cobalt.10124764' '--jobid' '10124764' '--cwd' '/lus/grand/projects/ACO2RDS/ruijie/DiffLinker_MOF/data/hMOF' '--env' 'COBALT_JOBID=10124764' '/bin/sleep' '3600'
+Thu Feb 02 16:23:56 2023 +0000 (UTC) 
+Thu Feb 02 16:23:56 2023 +0000 (UTC) Environment:
+Thu Feb 02 16:23:56 2023 +0000 (UTC) SHELL=/bin/bash
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_NODEFILE=/tmp/tmpOy0A50
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_PARTNAME=thetagpu06-gpu1
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_JOBID=10124764
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_STARTTIME=1675355026
+Thu Feb 02 16:23:56 2023 +0000 (UTC) LOGNAME=ray16
+Thu Feb 02 16:23:56 2023 +0000 (UTC) USER=ray16
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_ENDTIME=1675358626
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_PARTSIZE=1
+Thu Feb 02 16:23:56 2023 +0000 (UTC) HOME=/home/ray16
+Thu Feb 02 16:23:56 2023 +0000 (UTC) COBALT_JOBSIZE=1
+Thu Feb 02 16:23:56 2023 +0000 (UTC) 
+Thu Feb 02 16:23:56 2023 +0000 (UTC) Info: stdin received from /dev/null
+Thu Feb 02 16:23:56 2023 +0000 (UTC) Info: stdout sent to /lus/grand/projects/ACO2RDS/ruijie/DiffLinker_MOF/data/hMOF/10124764.output
+Thu Feb 02 16:23:56 2023 +0000 (UTC) Info: stderr sent to /lus/grand/projects/ACO2RDS/ruijie/DiffLinker_MOF/data/hMOF/10124764.error
+Thu Feb 02 16:23:56 2023 +0000 (UTC) 
+Thu Feb 02 17:24:02 2023 +0000 (UTC) Info: maximum execution time exceeded; initiating job termination
+Thu Feb 02 17:24:03 2023 +0000 (UTC) Info: job is in the process of exiting; user delete request ignored
