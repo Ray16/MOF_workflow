@@ -9,6 +9,7 @@ nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers')
 os.mkdir('output_for_pormake')
 
 for node in nodes:
+    print(f'Now on node: {node}')
     base_dir = f'output/{node}/'
     for file in os.listdir(base_dir):
         if not file.startswith('.'):
