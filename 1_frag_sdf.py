@@ -2,7 +2,6 @@ import os
 from glob import glob
 import shutil
 import subprocess
-from subprocess import run
 
 nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data') if 'conformers' in i]
 
@@ -22,8 +21,8 @@ for node in nodes:
     
     # generate sdf for frags and linkers
     os.mkdir(OUT_DIR)
-    run(['python','-W','ignore','prepare_dataset_parallel.py','--table',INPUT_SMILES,'--sdf-dir',TARGET_DIR,'--out-dir',OUT_DIR,'--template',OUTPUT_TEMPLATE,'--cores',CORES])
+    subprocess.run(f'python -W ignore prepare_dataset_parallel.py --table {INPUT_SMILES} --sdf-dir {TARGET_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --cores {CORES}')
 
     # filter and merge fragments
-    run(['python','-W','ignore','filter_and_merge.py','--in-dir',OUT_DIR,'--out-dir',OUT_DIR,'--template',OUTPUT_TEMPLATE,'--number-of-files',CORES])
+    subprocess.run(f'python -W ignore filter_and_merge.py --in-dir {OUT_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --number-of-files {CORES}')
     

@@ -1,5 +1,5 @@
 import ast
-from subprocess import run
+import subprocess
 import itertools
 from tqdm import tqdm
 import numpy as np
@@ -87,7 +87,7 @@ for node in unique_node_select:
     
     # generate SMILES
     print('Generating SMILES ... ')
-    run(['python','prepare_data_from_sdf.py','--sdf_path',f'data/conformers_{node}.sdf','--output_path',f'data/fragments_smi/frag_{node}.txt','--verbose'])
+    subprocess.run(f'python prepare_data_from_sdf.py --sdf_path data/conformers_{node}.sdf --output_path data/fragments_smi/frag_{node}.txt --verbose')
 
     # remove duplicates
     data = open(f'data/fragments_smi/frag_{node}.txt').readlines()
