@@ -21,8 +21,8 @@ for node in nodes:
     
     # generate sdf for frags and linkers
     os.mkdir(OUT_DIR)
-    subprocess.run(f'python -W ignore prepare_dataset_parallel.py --table {INPUT_SMILES} --sdf-dir {TARGET_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --cores {CORES}')
+    subprocess.run(f'python -W ignore prepare_dataset_parallel.py --table {INPUT_SMILES} --sdf-dir {TARGET_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --cores {CORES}',shell=True)
 
     # filter and merge fragments
-    subprocess.run(f'python -W ignore filter_and_merge.py --in-dir {OUT_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --number-of-files {CORES}')
+    subprocess.run(f'python -W ignore filter_and_merge.py --in-dir {OUT_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --number-of-files {CORES}',shell=True)
     
