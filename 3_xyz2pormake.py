@@ -18,8 +18,8 @@ for node in nodes:
             result = subprocess.run(f'obabel {os.path.join(base_dir,file)} -osmi', shell=True, stdout=PIPE, stderr=PIPE, universal_newlines=True).stdout.split()[0]
             # remove square brackets
             result = result.replace('[','').replace(']','')
-            os.mkdir(f'output_for_pormake/xyz_h/{node}/')
-            os.mkdir(f'output_for_pormake/xyz_X/{node}/')
+            os.mkdirs(f'output_for_pormake/xyz_h/{node}/',exist_ok=True)
+            os.mkdirs(f'output_for_pormake/xyz_X/{node}/',exist_ok=True)
             # add hydrogen
             target_xyz_path = f'output_for_pormake/xyz_h/{node}/mol_{mol_num}.xyz'
             subprocess.run(f'obabel -:"{result}" --gen3D -O {target_xyz_path}', shell=True)
