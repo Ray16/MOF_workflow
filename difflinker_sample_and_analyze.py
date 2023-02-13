@@ -186,7 +186,8 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
             x = x + mean * node_mask
 
             offset_idx = batch_i * batch_size
-            names = [f'output_{offset_idx+i}_{name}' for i in range(batch_size)]
+            #names = [f'output_{offset_idx+i}_{name}' for i in range(batch_size)]
+            names = [f'mol_{n_mol}' for i in range(batch_size)]
             save_xyz_file(output_dir, h, x, node_mask, names=names, is_geom=ddpm.is_geom, suffix='')
 
             for i in range(batch_size):
