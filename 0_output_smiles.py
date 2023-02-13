@@ -72,7 +72,8 @@ for node in unique_node_select:
 
     # output to sdf
     print('Outputting conformers to sdf ... ')
-    conformer_sdf_path = f'data/conformers_{node}.sdf'
+    os.mkdir(f'data/conformers')
+    conformer_sdf_path = f'data/conformers/conformers_{node}.sdf'
 
     writer = Chem.SDWriter(conformer_sdf_path)
     for smile in tqdm(all_smiles):

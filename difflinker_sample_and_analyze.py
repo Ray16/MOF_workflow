@@ -190,10 +190,10 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
             names = [f'mol_{n_mol}' for i in range(batch_size)]
             save_xyz_file(output_dir, h, x, node_mask, names=names, is_geom=ddpm.is_geom, suffix='')
 
-            for i in range(batch_size):
-                out_xyz = f'{output_dir}/output_{offset_idx+i}_{name}_.xyz'
-                out_sdf = f'{output_dir}/output_{offset_idx+i}_{name}_.sdf'
-                subprocess.run(f'obabel {out_xyz} -O {out_sdf} 2> /dev/null', shell=True)
+            # for i in range(batch_size):
+            #     out_xyz = f'{output_dir}/output_{offset_idx+i}_{name}_.xyz'
+            #     out_sdf = f'{output_dir}/output_{offset_idx+i}_{name}_.sdf'
+            #     subprocess.run(f'obabel {out_xyz} -O {out_sdf} 2> /dev/null', shell=True)
             #print(f'Saved generated molecules in .xyz and .sdf format in directory {output_dir}')
 
             #chain_batch, node_mask = ddpm.sample_chain(data, sample_fn=sample_fn, keep_frames=ddpm.FRAMES) #ddpm.FRAMES = 100 default 
