@@ -171,8 +171,8 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
         dataloader = get_dataloader(dataset, batch_size=batch_size, collate_fn=collate_with_fragment_edges)
 
         # Sampling
-        for batch_i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
-            print('Sampling only the FINAL output...')
+        for batch_i, data in enumerate(dataloader):
+            #print('Sampling only the FINAL output...')
             chain, node_mask = ddpm.sample_chain(data, sample_fn=sample_fn, keep_frames=1)
             x = chain[0][:, :, :ddpm.n_dims]
             h = chain[0][:, :, ddpm.n_dims:]
@@ -194,7 +194,7 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
                 out_xyz = f'{output_dir}/output_{offset_idx+i}_{name}_.xyz'
                 out_sdf = f'{output_dir}/output_{offset_idx+i}_{name}_.sdf'
                 subprocess.run(f'obabel {out_xyz} -O {out_sdf} 2> /dev/null', shell=True)
-            print(f'Saved generated molecules in .xyz and .sdf format in directory {output_dir}')
+            #print(f'Saved generated molecules in .xyz and .sdf format in directory {output_dir}')
 
             #chain_batch, node_mask = ddpm.sample_chain(data, sample_fn=sample_fn, keep_frames=ddpm.FRAMES) #ddpm.FRAMES = 100 default 
             #chain_batch : (F,B,L,D); node_mask : (B,D)
@@ -243,7 +243,7 @@ if __name__ == '__main__':
         n_steps=args.n_steps,
         linker_size=args.linker_size,
         anchors=args.anchors,
-        samples_dir=args.samples_dir #give it to DDPM
+        #samples_dir=args.samples_dir #give it to DDPM
         # out_mol_path=args.out_mol_path #set it anew
     )
     print("--- %s seconds ---" % (time.time() - start_time))
