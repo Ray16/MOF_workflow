@@ -17,7 +17,7 @@ for node in nodes:
             result = result.replace('[','').replace(']','')
             # add hydrogen
             target_xyz_path = f'xyz_h/mol_{mol_num}.xyz'
-            subprocess.run(f'obabel -:{result} --gen3D -O {target_xyz_path}', shell=True)
+            subprocess.run(f'obabel -:"{result}" --gen3D -O {target_xyz_path}', shell=True)
             # remove invalid structures
             info = ''.join(open(target_xyz_path).readlines())
             if 'nan' in info:
