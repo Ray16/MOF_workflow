@@ -17,7 +17,7 @@ for node in nodes:
     CORES='32'
     
     # generate sdf of molecular fragments
-    print('Generating molecular fragmnets ...')
+    print('Generating molecular fragmnets ...   ')
     os.makedirs(TARGET_DIR,exist_ok=True)
     subprocess.run(['python','-W','ignore','rdkit_conf_parallel.py',INPUT_SMILES,OUTPUT_TEMPLATE,'--cores',CORES],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for sdf in glob('*.sdf'):
