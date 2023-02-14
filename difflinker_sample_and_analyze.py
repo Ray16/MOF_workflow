@@ -102,7 +102,7 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
     os.makedirs(output_dir, exist_ok=True)
 
     if linker_size.isdigit():
-        print(f'Will generate linkers with {linker_size} atoms')
+        print(f'Generating linkers with {linker_size} atoms')
         linker_size = int(linker_size)
 
         def sample_fn(_data):
