@@ -2,7 +2,7 @@ import os
 from tqdm import tqdm
 import subprocess
 
-nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data') if 'conformers' in i]
+nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers') if 'conformers' in i]
 
 for node in tqdm(nodes):
     OUTPUT_DIR = f'output/{node}'

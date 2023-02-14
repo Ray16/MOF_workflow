@@ -1,3 +1,4 @@
+import os
 import ast
 import subprocess
 import itertools
@@ -72,7 +73,7 @@ for node in unique_node_select:
 
     # output to sdf
     print('Outputting conformers to sdf ... ')
-    os.mkdir(f'data/conformers')
+    os.makedirs(f'data/conformers',exist_ok=True)
     conformer_sdf_path = f'data/conformers/conformers_{node}.sdf'
 
     writer = Chem.SDWriter(conformer_sdf_path)
@@ -88,7 +89,7 @@ for node in unique_node_select:
     
     # generate SMILES
     print('Generating SMILES ... ')
-    subprocess.run(f'python prepare_data_from_sdf.py --sdf_path data/conformers_{node}.sdf --output_path data/fragments_smi/frag_{node}.txt --verbose',shell=True)
+    subprocess.run(f'python prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node}.sdf --output_path data/fragments_smi/frag_{node}.txt --verbose',shell=True)
 
     # remove duplicates
     data = open(f'data/fragments_smi/frag_{node}.txt').readlines()

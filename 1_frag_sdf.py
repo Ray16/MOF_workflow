@@ -3,7 +3,7 @@ from glob import glob
 import shutil
 import subprocess
 
-nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data') if 'conformers' in i]
+nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers') if 'conformers' in i]
 
 for node in nodes:
     print(f'Now on node {node}')
@@ -15,7 +15,7 @@ for node in nodes:
     
     # generate sdf of molecular fragments
     os.mkdir(TARGET_DIR)
-    run(['python','-W','ignore','rdkit_conf_parallel.py',INPUT_SMILES,OUTPUT_TEMPLATE,'--cores',CORES],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    subprocess.run(['python','-W','ignore','rdkit_conf_parallel.py',INPUT_SMILES,OUTPUT_TEMPLATE,'--cores',CORES],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for sdf in glob('*.sdf'):
         shutil.move(sdf,TARGET_DIR) 
     
