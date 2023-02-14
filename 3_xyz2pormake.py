@@ -7,7 +7,7 @@ from scipy.spatial.distance import euclidean
 
 nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers') if 'conformers' in i]
 
-os.mkdir('output_for_pormake')
+os.makedirs('output_for_pormake',exist_ok=True)
 
 for node in nodes:
     print(f'Now on node: {node}')
