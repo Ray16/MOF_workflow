@@ -14,13 +14,13 @@ for node in nodes:
     CORES='32'
     
     # generate sdf of molecular fragments
-    os.mkdir(TARGET_DIR)
+    os.makedirs(TARGET_DIR,exist_ok=True)
     subprocess.run(['python','-W','ignore','rdkit_conf_parallel.py',INPUT_SMILES,OUTPUT_TEMPLATE,'--cores',CORES],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for sdf in glob('*.sdf'):
         shutil.move(sdf,TARGET_DIR) 
     
     # generate sdf for frags and linkers
-    os.mkdir(OUT_DIR)
+    os.makedirs(OUT_DIR,exist_ok=True)
     subprocess.run(f'python -W ignore prepare_dataset_parallel.py --table {INPUT_SMILES} --sdf-dir {TARGET_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --cores {CORES}',shell=True)
 
     # filter and merge fragments
