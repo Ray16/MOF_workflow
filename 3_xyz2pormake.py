@@ -13,7 +13,7 @@ for node in nodes:
     print(f'Now on node: {node}')
     base_dir = f'output/{node}/'
     xyz_H_dir = 'output_for_pormake/xyz_h/'
-    xyz_X_dir = 'output_for_pormake/xyz_h/'
+    xyz_X_dir = 'output_for_pormake/xyz_X/'
     # add Hs
     for file in os.listdir(base_dir):
         if not file.startswith('.'):
