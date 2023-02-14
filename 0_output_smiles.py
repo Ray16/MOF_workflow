@@ -52,9 +52,10 @@ for n in unique_node_select:
 
 # load data
 for node in unique_node_select:
-    print(f'Now on node {node} ... ')
-    input_data_path = f'data/data_by_node/{node}.csv' 
-    output_data_path = f'data/data_high_wc/{node}.csv'
+    node_name = node.replace('[','').replace(']','')
+    print(f'Now on node {node_name} ... ')
+    input_data_path = f'data/data_by_node/{node_name}.csv' 
+    output_data_path = f'data/data_high_wc/{node_name}.csv'
 
     df = pd.read_csv(input_data_path)
 
@@ -74,7 +75,7 @@ for node in unique_node_select:
     # output to sdf
     print('Outputting conformers to sdf ... ')
     os.makedirs(f'data/conformers',exist_ok=True)
-    conformer_sdf_path = f'data/conformers/conformers_{node}.sdf'
+    conformer_sdf_path = f'data/conformers/conformers_{node_name}.sdf'
 
     writer = Chem.SDWriter(conformer_sdf_path)
     for smile in tqdm(all_smiles):
@@ -89,13 +90,13 @@ for node in unique_node_select:
     
     # generate SMILES
     print('Generating SMILES ... ')
-    subprocess.run(f'python prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node}.sdf --output_path data/fragments_smi/frag_{node}.txt --verbose',shell=True)
+    subprocess.run(f'python prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node_name}.sdf --output_path data/fragments_smi/frag_{node_name}.txt --verbose',shell=True)
 
     # remove duplicates
-    data = open(f'data/fragments_smi/frag_{node}.txt').readlines()
+    data = open(f'data/fragments_smi/frag_{node_name}.txt').readlines()
     #print(f'# of fragment-linker pairs: {len(data)}')
     unique_data = pd.Series(data).unique()
     #print(f'# of unique fragment-linker pairs: {len(unique_data)}')
-    with open(f'data/fragments_smi/frag_{node}_unique.txt','w+') as f:
+    with open(f'data/fragments_smi/frag_{node_name}_unique.txt','w+') as f:
         for line in unique_data:
             f.write(line)
