@@ -25,7 +25,6 @@ for node in nodes:
                 result = result.replace('[','').replace(']','')
                 if '@' not in result:
                     os.makedirs(os.path.join(xyz_H_dir,node),exist_ok=True)
-                    os.makedirs(os.path.join(xyz_X_dir,node),exist_ok=True)
                     # add hydrogen
                     target_xyz_path = f'output_for_pormake/xyz_h/{node}/mol_{mol_num}.xyz'
                     subprocess.run(f'obabel -:"{result}" --gen3D -O {target_xyz_path}', shell=True)
@@ -37,10 +36,10 @@ for node in nodes:
                 pass
 
     # add Xs
-    for file in os.listdir(xyz_H_dir):
+    for file in os.listdir(xyz_H_dir,node):
         if not file.startswith('.'):
                 try:
-                    data = open(os.path.join(xyz_H_dir,file)).readlines() # header = 2
+                    data = open(os.path.join(xyz_H_dir,node,file)).readlines() # header = 2
                     lines = [i.strip() for i in data][2:]
                     ele = [i.split()[0] for i in lines]
                     x = [float(i.split()[1]) for i in lines]
@@ -63,7 +62,8 @@ for node in nodes:
                     ind_H2_max_dist = H_indices[i_j_pair_max_dist[1]]
                     data[ind_H1_max_dist+2] = data[ind_H1_max_dist+2].replace('H','X')
                     data[ind_H2_max_dist+2] = data[ind_H2_max_dist+2].replace('H','X')
-                    with open(os.path.join(xyz_X_dir,'E_'+file),'w+') as f:
+                    os.makedirs(os.path.join(xyz_X_dir,node),exist_ok=True)
+                    with open(os.path.join(xyz_X_dir,node,'E_'+file),'w+') as f:
                             for line in data:
                                 f.write(line)
                 except:
