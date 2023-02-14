@@ -59,7 +59,7 @@ for n in unique_node_select:
 
 # load data
 for node in unique_node_select:
-    node_name = node.replace('[','').replace(']','').replace('()','').replace(')','')
+    node_name = node.replace('[','').replace(']','').replace('(','').replace(')','')
     print(f'Now on node {node_name} ... ')
     input_data_path = f'data/data_by_node/{node_name}.csv' 
     output_data_path = f'data/data_high_wc/{node_name}.csv'
