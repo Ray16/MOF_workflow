@@ -1,5 +1,6 @@
 import os
 import subprocess
+import multiprocessing
 
 nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers') if 'conformers' in i]
 
