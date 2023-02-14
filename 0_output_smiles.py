@@ -53,8 +53,9 @@ os.makedirs(f'data/fragments_smi',exist_ok=True)
 
 # output each node to a separate csv files
 for n in unique_node_select:
+    n_name = n.replace('[','').replace(']','')
     df_info_select_node = df_info[df_info.metal_node == n]
-    df_info_select_node.to_csv(f'data/data_by_node/{n}.csv',index=False)
+    df_info_select_node.to_csv(f'data/data_by_node/{n_name}.csv',index=False)
 
 # load data
 for node in unique_node_select:
