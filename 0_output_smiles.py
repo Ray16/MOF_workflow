@@ -45,6 +45,12 @@ print(df_freq)
 unique_node_select = list(df_freq[df_freq.freq>=5000].node) # select occuring nodes
 df_info_select = df_info[df_info['metal_node'].isin(unique_node_select)] # select df_info with node only in list(unique_node_select)
 
+# create necessary folders
+os.makedirs(f'data/conformers',exist_ok=True)
+os.makedirs(f'data/data_by_node',exist_ok=True)
+os.makedirs(f'data/data_high_wc',exist_ok=True)
+os.makedirs(f'data/fragments_smi',exist_ok=True)
+
 # output each node to a separate csv files
 for n in unique_node_select:
     df_info_select_node = df_info[df_info.metal_node == n]
@@ -74,7 +80,6 @@ for node in unique_node_select:
 
     # output to sdf
     print('Outputting conformers to sdf ... ')
-    os.makedirs(f'data/conformers',exist_ok=True)
     conformer_sdf_path = f'data/conformers/conformers_{node_name}.sdf'
 
     writer = Chem.SDWriter(conformer_sdf_path)

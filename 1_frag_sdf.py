@@ -5,6 +5,9 @@ import subprocess
 
 nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers') if 'conformers' in i]
 
+# create necessary folders
+os.makedirs(f'data/sdf',exist_ok=True)
+
 for node in nodes:
     print(f'Now on node {node}')
     TARGET_DIR = f'data/sdf/{node}/'
