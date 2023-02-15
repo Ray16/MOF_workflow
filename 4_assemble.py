@@ -23,6 +23,8 @@ def gen_mof(node,linker,tpo):
     T = database.get_topo(tpo)
     N = database.get_bb(node)
     L = database.get_bb(linker)
+    print(N)
+    print(L)
 
     node_bbs = {0: N}
 
@@ -30,6 +32,7 @@ def gen_mof(node,linker,tpo):
     if node+'_'+linker+'.cif' not in os.listdir(mof_dir):
             MOF = builder.build_by_type(topology=T, node_bbs=node_bbs, edge_bbs=edge_bbs)
             cif_name = tpo+'_'+node+'_'+linker+'.cif'
+            print(f'Generated {cif_name}')
             MOF.write_cif(mof_dir+cif_name)
 
 if __name__ == '__main__':
@@ -49,10 +52,11 @@ if __name__ == '__main__':
         # copy node to bbs dir
         shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
         # copy linkers to bbs dir
+        print('Copying linkers to pormake dir ...')
         for linker in os.listdir(os.path.join(linkers_dir,node)):
-            print(f'linker: {linker}')
             shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
         # generate MOF
-        linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node))]
+        print(f'Generating MOFs ...')
+        linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
         for l in linker_names:
             gen_mof(node,l,'pcu')
