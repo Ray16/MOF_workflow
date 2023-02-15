@@ -1,6 +1,6 @@
 import argparse
 import os
-import prepare_dataset as prep
+import utils.prepare_dataset as prep
 import multiprocessing as mp
 
 

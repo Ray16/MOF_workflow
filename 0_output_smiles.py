@@ -96,7 +96,7 @@ for node in unique_node_select:
     
     # generate SMILES
     print('Generating SMILES ... ')
-    subprocess.run(f'python prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node_name}.sdf --output_path data/fragments_smi/frag_{node_name}.txt --verbose',shell=True)
+    subprocess.run(f'python utils/prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node_name}.sdf --output_path data/fragments_smi/frag_{node_name}.txt --verbose',shell=True)
 
     # remove duplicates
     data = open(f'data/fragments_smi/frag_{node_name}.txt').readlines()
