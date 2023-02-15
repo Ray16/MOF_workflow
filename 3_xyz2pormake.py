@@ -38,7 +38,7 @@ for node in nodes:
 
     print(f'Adding connection points ... ')
     # add Xs
-    for file in os.listdir(xyz_H_dir,node):
+    for file in os.listdir(os.path.join(xyz_H_dir,node)):
         if not file.startswith('.'):
                 try:
                     data = open(os.path.join(xyz_H_dir,node,file)).readlines() # header = 2
