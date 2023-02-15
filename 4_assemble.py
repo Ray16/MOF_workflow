@@ -17,8 +17,6 @@ nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
 
 @timeout_decorator.timeout(5)
 def gen_mof(node,linker,tpo):
-    sys.path.insert(1, os.path.join('MOFs',node))
-    import pormake as pm
     builder = pm.Builder()
     database = pm.Database()
     
@@ -45,11 +43,16 @@ if __name__ == '__main__':
 
         # copy template PORMAKE dir
         shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
+        sys.path.insert(1, os.path.join('MOFs',node)) # add path to sys
+        import pormake as pm
+
         # copy node to bbs dir
         shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
         # copy linkers to bbs dir
         for linker in os.listdir(os.path.join(linkers_dir,node)):
             print(f'linker: {linker}')
             shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
-            # generate MOF
-            gen_mof(node,linker,'pcu')
+        # generate MOF
+        linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node))]
+        for l in linker_names:
+            gen_mof(node,l,'pcu')
