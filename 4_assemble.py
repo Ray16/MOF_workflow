@@ -48,7 +48,7 @@ if __name__ == '__main__':
         # copy node to bbs dir
         shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
         # copy linkers to bbs dir
-        for linker in os.listdir(linkers_dir,node):
+        for linker in os.listdir(os.path.join(linkers_dir,node)):
             print(f'linker: {linker}')
             shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
             # generate MOF
