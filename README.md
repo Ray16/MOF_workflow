@@ -1,13 +1,13 @@
 ## Iterative design of MOF structures using generative models
 
-This framework is based on DeLinker and DiffLinker, which enables generation of new organic linkers with parsed linkers from high-performing MOFs from the hMOF database. The default target property is 2 mmol/g @ 0.1 bar.
+This framework enables generation of new MOFs structures with desinated node/topology and DiffLinker-generated linkers, which are derived from parsed linkers from high-performing MOFs in the hMOF database.
 
 The following steps are used for new linker generation:
 1. Select high-performing MOFs from hMOF database based on CO2 working capacity
-2. Parse the SMILES strings of organic linkers based on MOFid
-3. Use Matched Molecular Pair Algorithm (MMPA) to fragment linkers into their components
+2. Parse the SMILES strings of MOF linkers based on MOFid
+3. Use Matched Molecular Pair Algorithm (MMPA) to fragment linkers into components
 4. Use DiffLinker to generate new linkers
-5. Use PORMAKE to assemble the newly generated linkers into MOFs
+5. Use PORMAKE to assemble the newly generated linkers with desinated node/topology into MOFs
 
 The following files were borrowed from DeLinker (in the *utils* dir):
 - prepare_data_from_sdf.py

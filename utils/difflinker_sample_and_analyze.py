@@ -64,18 +64,6 @@ def read_molecules(path):
 
 
 def generate_animation(ddpm, chain_batch, node_mask,n_mol):
-    """e.g. 
-    Inside a directory
-        ddpm.samples_dir/mol_1/
-            mol_1_0.xyz
-            mol_1_1.xyz
-            mol_1_2.xyz
-            mol_1_0.png
-            mol_1_1.png
-            mol_1_2.png
-            mol_1_2.png
-            output.gif
-    """
     # batch_indices, mol_indices = utils.get_batch_idx_for_animation(self.batch_size, batch_i)
 
     batch_size = chain_batch.size(1) #Batch size
