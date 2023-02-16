@@ -84,7 +84,7 @@ def generate_animation(ddpm, chain_batch, node_mask,n_mol):
         visualize_chain(chain_output, wandb=None, mode=name, is_geom=ddpm.is_geom) #set wandb None for now!
 
 def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors):
-
+    print(f'linker_size: {linker_size}')
     # Setup
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     os.makedirs(output_dir, exist_ok=True)
