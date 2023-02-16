@@ -26,7 +26,7 @@ parser.add_argument(
     help='Path to the DiffLinker model'
 )
 parser.add_argument(
-    '--linker_size', action='store', type=str, required=True,
+    '--linker_size', action='store', type=int, required=True,
     help='Either linker size (int) or path to the GNN for size prediction'
 )
 parser.add_argument(
