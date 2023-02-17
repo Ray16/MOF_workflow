@@ -13,6 +13,8 @@ nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
 
 @timeout_decorator.timeout(5)
 def gen_mof(node,linker,tpo):
+    import pormake as pm
+    print(pm.__file__)
     builder = pm.Builder()
     database = pm.Database()
     
