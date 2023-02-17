@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
             # copy template PORMAKE code to MOFs dir
             shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
-            sys.path.insert(1, os.path.join('MOFs',node)) # add pormake path to sys
+            sys.path.insert(-1, os.path.join('MOFs',node)) # add pormake path to sys
             import pormake as pm
 
             # copy node to bbs dir
@@ -56,3 +56,6 @@ if __name__ == '__main__':
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
                 gen_mof(node,l,'pcu')
+
+            # remove the previous pormake path
+            sys.path.pop()
