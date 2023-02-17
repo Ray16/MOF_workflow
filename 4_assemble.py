@@ -14,10 +14,6 @@ nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
 
 @timeout_decorator.timeout(5)
 def gen_mof(node,linker,tpo):
-    print(pm.__file__)
-    builder = pm.Builder()
-    database = pm.Database()
-    
     T = database.get_topo(tpo)
     N = database.get_bb(node)
     L = database.get_bb(linker)
@@ -57,6 +53,11 @@ if __name__ == '__main__':
             # append pormake path
             sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
             import pormake as pm
+
+            builder = pm.Builder()
+            database = pm.Database()
+            print(builder,database)
+
             # generate MOF
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
