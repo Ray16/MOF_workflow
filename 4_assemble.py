@@ -57,9 +57,8 @@ if __name__ == '__main__':
                 shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
 
             # append pormake path
-            #sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
+            sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
             os.chdir(os.path.join(parent_dir,'MOFs',node))
-            print(os.getcwd())
             import pormake as pm
 
             # generate MOF
@@ -70,5 +69,5 @@ if __name__ == '__main__':
             del pm
             os.chdir(parent_dir)
             # remove completed pormake job path from sys path
-            #sys.path.remove(os.path.join('MOFs',node))
-            #sys.modules.pop('pormake')
+            sys.path.remove(os.path.join('MOFs',node))
+            sys.modules.pop('pormake')
