@@ -46,8 +46,7 @@ if __name__ == '__main__':
 
             # copy node to bbs dir
             print(f'Copying node {node} to pormake dir ...')
-            for n in os.listdir(os.path.join(node_dir)):
-                shutil.copy(os.path.join(node_dir,n),os.path.join(target_mof_dir,'pormake','database','bbs'))
+            shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
 
             # copy linkers to bbs dir
             print('Copying linkers to pormake dir ...')
@@ -58,6 +57,9 @@ if __name__ == '__main__':
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
                 gen_mof(node,l,'pcu')
+                break
 
             # remove the previous pormake path
+            print(sys.path)
             sys.path.remove(os.path.join('MOFs',node))
+            print(sys.path)
