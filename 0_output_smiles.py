@@ -69,7 +69,7 @@ for node in unique_node_select:
     # select entries with high working capactiy at (wc > 2mmol/g @ 0.1 bar)
     df_high_wc = df[df['CO2_wc_01'] >=2]
 
-    # select entries with three parsed linkers
+    # select entries with three linkers
     len_linkers = [len(ast.literal_eval(df_high_wc['organic_linker'].iloc[i])) for i in range(len(df_high_wc['organic_linker']))]
     df_high_wc['len_linkers'] = len_linkers
     df_high_wc_select = df_high_wc[df_high_wc.len_linkers==3]
@@ -100,12 +100,3 @@ for node in unique_node_select:
     # generate SMILES
     print('Generating SMILES ... ')
     subprocess.run(f'python utils/prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node_name}.sdf --output_path data/fragments_smi/frag_{node_name}.txt --verbose',shell=True)
-
-    # remove duplicates
-    data = open(f'data/fragments_smi/frag_{node_name}.txt').readlines()
-    #print(f'# of fragment-linker pairs: {len(data)}')
-    unique_data = pd.Series(data).unique()
-    #print(f'# of unique fragment-linker pairs: {len(unique_data)}')
-    with open(f'data/fragments_smi/frag_{node_name}_unique.txt','w+') as f:
-        for line in unique_data:
-            f.write(line)

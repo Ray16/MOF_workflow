@@ -12,7 +12,7 @@ os.makedirs(f'data/sdf',exist_ok=True)
 for node in nodes:
     print(f'Now on node {node}')
     TARGET_DIR = f'data/sdf/{node}/'
-    INPUT_SMILES=f'data/fragments_smi/frag_{node}_unique.txt'
+    INPUT_SMILES=f'data/fragments_smi/frag_{node}.txt'
     OUTPUT_TEMPLATE='hMOF'
     OUT_DIR=f'data/fragments_all/{node}/'
     CORES='32'
