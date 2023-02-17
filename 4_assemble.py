@@ -12,9 +12,13 @@ os.makedirs('MOFs',exist_ok=True)
 linkers_dir = 'output_for_pormake/xyz_X'
 nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
 
-'''
+
 @timeout_decorator.timeout(5)
 def gen_mof(node,linker,tpo):
+
+    builder = pm.Builder()
+    database = pm.Database()
+
     T = database.get_topo(tpo)
     N = database.get_bb(node)
     L = database.get_bb(linker)
@@ -27,7 +31,6 @@ def gen_mof(node,linker,tpo):
             cif_name = tpo+'_'+node+'_'+linker+'.cif'
             print(f'Generated {cif_name}')
             MOF.write_cif(os.path.join(mof_dir,cif_name))
-'''
     
 
 if __name__ == '__main__':
@@ -53,30 +56,15 @@ if __name__ == '__main__':
                 shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
 
             # append pormake path
-            sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
+            #sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
+            os.chdir(f'MOFs/{node}')
             import pormake as pm
-
-            builder = pm.Builder()
-            database = pm.Database()
-            print(builder,database)
 
             # generate MOF
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
-                T = database.get_topo('pcu')
-                N = database.get_bb(node)
-                L = database.get_bb(linker)
-
-                node_bbs = {0: N}
-
-                edge_bbs = {(0, 0): L}
-                if node+'_'+linker+'.cif' not in os.listdir(mof_dir):
-                        MOF = builder.build_by_type(topology=T, node_bbs=node_bbs, edge_bbs=edge_bbs)
-                        cif_name = 'pcu'+'_'+node+'_'+linker+'.cif'
-                        print(f'Generated {cif_name}')
-                MOF.write_cif(os.path.join(mof_dir,cif_name))
+                gen_mof(node,l,'pcu')
                 break
-                #gen_mof(node,l,'pcu')
             # remove completed pormake job path from sys path
-            sys.path.remove(os.path.join('MOFs',node))
-            sys.modules.pop('pormake')
+            #sys.path.remove(os.path.join('MOFs',node))
+            #sys.modules.pop('pormake')
