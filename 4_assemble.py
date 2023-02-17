@@ -75,6 +75,7 @@ if __name__ == '__main__':
                         cif_name = T+'_'+node+'_'+linker+'.cif'
                         print(f'Generated {cif_name}')
                 MOF.write_cif(os.path.join(mof_dir,cif_name))
+                break
                 #gen_mof(node,l,'pcu')
             # remove completed pormake job path from sys path
             sys.path.remove(os.path.join('MOFs',node))
