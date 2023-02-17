@@ -11,7 +11,7 @@ os.makedirs('MOFs',exist_ok=True)
 
 linkers_dir = 'output_for_pormake/xyz_X'
 nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
-parent_dir = os.path.realpath(__file__)
+parent_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 @timeout_decorator.timeout(5)
