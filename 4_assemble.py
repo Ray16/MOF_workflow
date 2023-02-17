@@ -46,7 +46,8 @@ if __name__ == '__main__':
 
             # copy node to bbs dir
             print(f'Copying node {node} to pormake dir ...')
-            shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
+            for n in os.listdir(os.path.join(node_dir)):
+                shutil.copy(os.path.join(node_dir,n),os.path.join(target_mof_dir,'pormake','database','bbs'))
 
             # copy linkers to bbs dir
             print('Copying linkers to pormake dir ...')
