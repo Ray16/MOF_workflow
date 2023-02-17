@@ -59,6 +59,7 @@ if __name__ == '__main__':
             # append pormake path
             #sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
             os.chdir(os.path.join(parent_dir,'MOFs',node))
+            print(os.getcwd())
             import pormake as pm
 
             # generate MOF
