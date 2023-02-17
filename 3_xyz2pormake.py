@@ -27,7 +27,7 @@ for node in nodes:
                     result = result.replace('[','').replace(']','')
                     if '@' not in result:
                         os.makedirs(os.path.join(xyz_H_dir,node),exist_ok=True)
-                        # add hydrogen
+                        # generate 3D coordinates (with hydrogens)
                         target_xyz_path = f'output_for_pormake/xyz_h/{node}/mol_{mol_num}.xyz'
                         subprocess.run(f'obabel -:"{result}" --gen3D -O {target_xyz_path}', shell=True)
                         # remove invalid structures
@@ -38,7 +38,7 @@ for node in nodes:
                     pass
 
         print(f'Adding connection points ... ')
-        # add Xs
+        # add Xs - atoms that are furthest part
         for file in os.listdir(os.path.join(xyz_H_dir,node)):
             if not file.startswith('.'):
                     try:
