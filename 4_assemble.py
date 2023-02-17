@@ -11,6 +11,7 @@ os.makedirs('MOFs',exist_ok=True)
 
 linkers_dir = 'output_for_pormake/xyz_X'
 nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
+parent_dir = os.path.realpath(__file__)
 
 
 @timeout_decorator.timeout(5)
@@ -57,7 +58,7 @@ if __name__ == '__main__':
 
             # append pormake path
             #sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
-            os.chdir(f'MOFs/{node}')
+            os.chdir(os.path.join(parent_dir,'MOFs',node))
             import pormake as pm
 
             # generate MOF
@@ -65,6 +66,8 @@ if __name__ == '__main__':
             for l in tqdm(linker_names):
                 gen_mof(node,l,'pcu')
                 break
+            del pm
+            os.chdir(parent_dir)
             # remove completed pormake job path from sys path
             #sys.path.remove(os.path.join('MOFs',node))
             #sys.modules.pop('pormake')
