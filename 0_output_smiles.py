@@ -79,13 +79,15 @@ for node in unique_node_select:
     list_smiles = [ast.literal_eval(i) for i in df_high_wc_select['organic_linker']]
     all_smiles = list(itertools.chain(*list_smiles))
     print(f'number of smiles: {len(all_smiles)}')
+    all_smiles_unique = list(pd.Series(all_smiles).unique())
+    print(f'number of unique_smiles: {len(all_smiles_unique)}')
 
     # output to sdf
     print('Outputting conformers to sdf ... ')
     conformer_sdf_path = f'data/conformers/conformers_{node_name}.sdf'
 
     writer = Chem.SDWriter(conformer_sdf_path)
-    for smile in tqdm(all_smiles):
+    for smile in tqdm(all_smiles_unique):
         try:
             mol = Chem.AddHs(Chem.MolFromSmiles(smile))
             conformers = AllChem.EmbedMultipleConfs(mol, numConfs=1)
