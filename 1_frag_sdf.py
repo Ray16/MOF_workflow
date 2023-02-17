@@ -20,10 +20,10 @@ for node in nodes:
     # generate sdf of molecular fragments
     print('Generating molecular fragments ...')
     os.makedirs(TARGET_DIR,exist_ok=True)
-    subprocess.run([f'python -W ignore utils/rdkit_conf_parallel.py {INPUT_SMILES} {OUTPUT_TEMPLATE} --cores CORES'],shell=True,stdout=PIPE,stderr=PIPE)
+    subprocess.run([f'python -W ignore utils/rdkit_conf_parallel.py {INPUT_SMILES} {OUTPUT_TEMPLATE} --cores {CORES}'],shell=True,stdout=PIPE,stderr=PIPE)
     for sdf in glob('*.sdf'):
         shutil.move(sdf,TARGET_DIR) 
-    break
+    
     # generate sdf for frags and linkers
     print(f'Generating sdf for frags and linkers ...')
     os.makedirs(OUT_DIR,exist_ok=True)
