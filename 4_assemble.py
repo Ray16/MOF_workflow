@@ -5,6 +5,7 @@ from tqdm import tqdm
 
 import timeout_decorator
 
+
 os.makedirs('MOFs',exist_ok=True)
 
 linkers_dir = 'output_for_pormake/xyz_X'
@@ -40,7 +41,7 @@ if __name__ == '__main__':
 
             # copy template PORMAKE code to MOFs dir
             shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
-            sys.path.insert(-1, os.path.join('MOFs',node)) # add pormake path to sys
+            sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
             import pormake as pm
 
             # copy node to bbs dir
