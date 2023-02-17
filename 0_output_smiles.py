@@ -78,6 +78,7 @@ for node in unique_node_select:
     # get list of SMILES for all linkers
     list_smiles = [ast.literal_eval(i) for i in df_high_wc_select['organic_linker']]
     all_smiles = list(itertools.chain(*list_smiles))
+    print(f'number of smiles: {len(all_smiles)}')
 
     # output to sdf
     print('Outputting conformers to sdf ... ')
