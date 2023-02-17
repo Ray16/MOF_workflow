@@ -1,4 +1,4 @@
-## Iterative design of MOF structures using generative models
+## Isoreticular design of MOF structures using generative models
 
 This framework enables generation of new MOFs structures with desinated node/topology and DiffLinker-generated linkers, which are derived from parsed linkers from high-performing MOFs in the hMOF database.
 

@@ -2,6 +2,7 @@ import argparse
 import os
 import time
 import numpy as np
+from tqdm import tqdm
 
 import torch
 import subprocess
@@ -159,7 +160,7 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
         dataloader = get_dataloader(dataset, batch_size=batch_size, collate_fn=collate_with_fragment_edges)
 
         # Sampling
-        for batch_i, data in enumerate(dataloader):
+        for batch_i, data in tqdm(enumerate(dataloader)):
             #print('Sampling only the FINAL output...')
             chain, node_mask = ddpm.sample_chain(data, sample_fn=sample_fn, keep_frames=1)
             x = chain[0][:, :, :ddpm.n_dims]
