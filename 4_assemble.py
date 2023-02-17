@@ -33,25 +33,26 @@ if __name__ == '__main__':
     node_dir = 'node_xyz'
 
     for node in nodes:
-        print(f'Now generating MOFs for node: {node}')
-        target_mof_dir = os.path.join('MOFs',node)
-        mof_dir = f'MOFs/{node}/gen_mofs'
+        if node != 'V':
+            print(f'Now generating MOFs for node: {node}')
+            target_mof_dir = os.path.join('MOFs',node)
+            mof_dir = f'MOFs/{node}/gen_mofs'
 
-        # copy template PORMAKE code to MOFs dir
-        shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
-        sys.path.insert(1, os.path.join('MOFs',node)) # add pormake path to sys
-        import pormake as pm
+            # copy template PORMAKE code to MOFs dir
+            shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
+            sys.path.insert(1, os.path.join('MOFs',node)) # add pormake path to sys
+            import pormake as pm
 
-        # copy node to bbs dir
-        print(f'Copying node {node} to pormake dir ...')
-        shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
+            # copy node to bbs dir
+            print(f'Copying node {node} to pormake dir ...')
+            shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(target_mof_dir,'pormake','database','bbs'))
 
-        # copy linkers to bbs dir
-        print('Copying linkers to pormake dir ...')
-        for linker in os.listdir(os.path.join(linkers_dir,node)):
-            shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
-        
-        # generate MOF
-        linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
-        for l in tqdm(linker_names):
-            gen_mof(node,l,'pcu')
+            # copy linkers to bbs dir
+            print('Copying linkers to pormake dir ...')
+            for linker in os.listdir(os.path.join(linkers_dir,node)):
+                shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(target_mof_dir,'pormake','database','bbs'))
+            
+            # generate MOF
+            linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
+            for l in tqdm(linker_names):
+                gen_mof(node,l,'pcu')
