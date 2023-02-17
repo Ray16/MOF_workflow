@@ -72,7 +72,7 @@ if __name__ == '__main__':
                 edge_bbs = {(0, 0): L}
                 if node+'_'+linker+'.cif' not in os.listdir(mof_dir):
                         MOF = builder.build_by_type(topology=T, node_bbs=node_bbs, edge_bbs=edge_bbs)
-                        cif_name = T+'_'+node+'_'+linker+'.cif'
+                        cif_name = 'pcu'+'_'+node+'_'+linker+'.cif'
                         print(f'Generated {cif_name}')
                 MOF.write_cif(os.path.join(mof_dir,cif_name))
                 break
