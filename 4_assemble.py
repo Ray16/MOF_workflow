@@ -35,13 +35,14 @@ if __name__ == '__main__':
 
     for node in nodes:
         if node != 'V':
-            print(f'Now generating MOFs for node: {node}')
+            print(f'Now generating MOFs with node: {node}')
             target_mof_dir = os.path.join('MOFs',node)
             mof_dir = f'MOFs/{node}/gen_mofs'
 
             # copy template PORMAKE code to MOFs dir
             shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
             sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
+            print(sys.path)
             import pormake as pm
 
             # copy node to bbs dir
