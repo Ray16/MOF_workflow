@@ -59,4 +59,4 @@ if __name__ == '__main__':
                 gen_mof(node,l,'pcu')
 
             # remove the previous pormake path
-            sys.path.pop()
+            sys.path.remove(os.path.join('MOFs',node))
