@@ -63,7 +63,7 @@ if __name__ == '__main__':
             # generate MOF
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
-                T = database.get_topo(T)
+                T = database.get_topo('pcu')
                 N = database.get_bb(node)
                 L = database.get_bb(linker)
 
