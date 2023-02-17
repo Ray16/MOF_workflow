@@ -13,6 +13,8 @@ nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
 
 @timeout_decorator.timeout(5)
 def gen_mof(node,linker,tpo):
+    # append pormake path
+    sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
     import pormake as pm
     print(pm.__file__)
     builder = pm.Builder()
@@ -30,6 +32,8 @@ def gen_mof(node,linker,tpo):
             cif_name = tpo+'_'+node+'_'+linker+'.cif'
             print(f'Generated {cif_name}')
             MOF.write_cif(os.path.join(mof_dir,cif_name))
+    # remove completed pormake job path from sys path
+    sys.path.remove(os.path.join('MOFs',node))
 
 if __name__ == '__main__':
     os.makedirs('MOFs',exist_ok=True)
@@ -43,9 +47,6 @@ if __name__ == '__main__':
 
             # copy template PORMAKE code to MOFs dir
             shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
-            sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
-            print(sys.path)
-            import pormake as pm
 
             # copy node to bbs dir
             print(f'Copying node {node} to pormake dir ...')
@@ -60,9 +61,3 @@ if __name__ == '__main__':
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
                 gen_mof(node,l,'pcu')
-                break
-
-            # remove the previous pormake path
-            print(sys.path)
-            sys.path.remove(os.path.join('MOFs',node))
-            print(sys.path)
