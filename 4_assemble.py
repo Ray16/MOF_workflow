@@ -29,6 +29,7 @@ def gen_mof(node,linker,tpo):
             cif_name = tpo+'_'+node+'_'+linker+'.cif'
             print(f'Generated {cif_name}')
             MOF.write_cif(os.path.join(mof_dir,cif_name))
+    
 
 if __name__ == '__main__':
     os.makedirs('MOFs',exist_ok=True)
@@ -61,4 +62,5 @@ if __name__ == '__main__':
             for l in tqdm(linker_names):
                 gen_mof(node,l,'pcu')
             # remove completed pormake job path from sys path
+            del pm
             sys.path.remove(os.path.join('MOFs',node))
