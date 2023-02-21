@@ -52,9 +52,6 @@ if __name__ == '__main__':
             mof_dir = f'MOFs/{node}/'
             os.makedirs(mof_dir,exist_ok=True)
 
-            # copy template PORMAKE code to MOFs dir
-            #shutil.copytree('PORMAKE_template',target_mof_dir,dirs_exist_ok=True)
-
             # copy node to template pormake bbs dir
             print(f'Copying node {node} to pormake dir ...')
             shutil.copy(os.path.join(node_dir,node+'.xyz'),os.path.join(pormake_dir,'pormake','database','bbs'))
@@ -64,26 +61,11 @@ if __name__ == '__main__':
             for linker in os.listdir(os.path.join(linkers_dir,node)):
                 shutil.copy(os.path.join(linkers_dir,node,linker),os.path.join(pormake_dir,'pormake','database','bbs'))
 
-            # append pormake path
-            #sys.path.append(os.path.join('MOFs',node)) # append pormake path to sys
-            #os.chdir(os.path.join(parent_dir,'MOFs',node))
-
             # generate MOF
             linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
             for l in tqdm(linker_names):
                 gen_mof(node,l,'pcu')
-                break
-            
-            # move generated MOFs to the target dir
-            #for MOF in os.path.join():
-            #    shutil.move('',)
 
             # remove sbus from PORMAKE template folder
             shutil.rmtree(os.path.join(pormake_dir,'pormake','database','bbs'))
             os.mkdir(os.path.join(pormake_dir,'pormake','database','bbs'))
-
-            #del pm
-            #os.chdir(parent_dir)
-            # remove completed pormake job path from sys path
-            #sys.path.remove(os.path.join('MOFs',node))
-            #sys.modules.pop('pormake')
