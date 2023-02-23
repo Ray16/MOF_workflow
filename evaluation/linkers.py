@@ -522,6 +522,7 @@ if __name__ == "__main__":
             'pred_mol_smi': pred_mol,
             'frag_smi': frag_mol 
                 })
+    print(data)
 
     #####DEPRECATED#####
     # valid = []
@@ -543,7 +544,6 @@ if __name__ == "__main__":
     ####################
 
     result = get_delinker_metrics_v2(data) #dict
-    print(result)
     if args.save_result:
         df_line = pd.DataFrame([result])
         if args.filename is None:
