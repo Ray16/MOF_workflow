@@ -18,6 +18,7 @@ for node in nodes:
         print(f'Adding hydrogens ... ')
         # add Hs
         for file in os.listdir(base_dir):
+            smiles = []
             if not file.startswith('.'):
                 try:
                     mol_num = file.split('_')[1]
@@ -25,6 +26,7 @@ for node in nodes:
                     result = subprocess.run(f'obabel {os.path.join(base_dir,file)} -osmi', shell=True, stdout=PIPE, stderr=PIPE, universal_newlines=True).stdout.split()[0]
                     # remove square brackets
                     result = result.replace('[','').replace(']','')
+                    smiles.append(result)
                     if '@' not in result:
                         os.makedirs(os.path.join(xyz_H_dir,node),exist_ok=True)
                         # generate 3D coordinates (with hydrogens)
@@ -36,6 +38,10 @@ for node in nodes:
                             os.remove(target_xyz_path)
                 except:
                     pass
+
+            with open(f'output/smiles_{node}.csv','w+') as f:
+                for smi in smiles:
+                    f.write(smi+'\n')
 
         print(f'Adding connection points ... ')
         # add Xs - atoms that are furthest part
