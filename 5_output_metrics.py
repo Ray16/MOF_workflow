@@ -23,4 +23,4 @@ for sys in os.listdir(pred_base_dir):
         df = pd.DataFrame({'index':range(len(true_smiles_all)),'true_molecules':true_smiles_all,'pred_molecules':pred_smiles_all,'frag_molecules':frag_smiles_all})
         df = df[~df["pred_molecules"].str.contains('@')] # remove bad entries
         df.to_csv(f'metrics/{sys}.csv',index=False)
-    subprocess.run([f'python -m evaluation.linkers --save_result --filename metrics/{sys}.csv'])
+    subprocess.run(f'python -m evaluation.linkers --save_result --filename metrics/{sys}.csv')
