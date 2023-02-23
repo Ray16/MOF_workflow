@@ -18,7 +18,7 @@ for sys in os.listdir(pred_base_dir):
         frag_smiles_all.append(line[2])
         # generate for SMILES_pred
         pred_mol = Chem.MolFromXYZBlock(os.path.join(pred_base_dir,sys,linker))
-        pred_smiles_all.append(Chem.MolToSMILES(pred_mol))
+        pred_smiles_all.append(Chem.MolToSmiles(pred_mol))
     print(true_smiles_all)
     print(frag_smiles_all)
     print(pred_smiles_all)
