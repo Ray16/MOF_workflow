@@ -17,8 +17,8 @@ for node in nodes:
     if len(os.listdir(base_dir)) > 0: # results not empty
         print(f'Adding hydrogens ... ')
         # add Hs
+        smiles = []
         for file in os.listdir(base_dir):
-            smiles = []
             if not file.startswith('.'):
                 try:
                     mol_num = file.split('_')[1]
@@ -39,9 +39,9 @@ for node in nodes:
                 except:
                     pass
 
-            with open(f'output/smiles_{node}.csv','w+') as f:
-                for smi in smiles:
-                    f.write(smi+'\n')
+        with open(f'output/smiles_{node}.csv','w+') as f:
+            for smi in smiles:
+                f.write(smi+'\n')
 
         print(f'Adding connection points ... ')
         # add Xs - atoms that are furthest part
