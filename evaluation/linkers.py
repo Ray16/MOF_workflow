@@ -455,6 +455,7 @@ def get_delinker_metrics_v2(data: List[Dict]):
     # Validity according to DeLinker paper:
     # Passing rdkit.Chem.Sanitize and the biggest fragment contains both fragments
     valid_data = get_valid_as_in_delinker(data)
+    print(f'number valid: {len(valid_data)}')
     validity_as_in_delinker = len(valid_data) / len(data)
     if len(valid_data) == 0:
         return default_values
@@ -542,11 +543,13 @@ if __name__ == "__main__":
     # print(pass_all, pass_SA, pass_RA, pass_PAINS, pass_NP, pass_SC)
     ####################
 
-    df = pd.DataFrame(columns=['true_mol_smi','pred_mol_smi','frag_smi'])
-    for d in data:
-        result = get_delinker_metrics_v2(d) #dict
-        df_line = pd.DataFrame([result])
-    df = df.append(df_line)
+    #df = pd.DataFrame(columns=['true_mol_smi','pred_mol_smi','frag_smi'])
+    #for d in data:
+        #result = get_delinker_metrics_v2(d) #dict
+        #df_line = pd.DataFrame([result])
+    result = get_delinker_metrics_v2(data) #dict
+    df = pd.DataFrame([result])
+    #df = df.append(df_line)
     filename_root, ext = os.path.splitext(args.filename)
     df.to_csv(filename_root + "_result" + ext)
 
