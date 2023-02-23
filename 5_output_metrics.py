@@ -17,8 +17,7 @@ for sys in os.listdir(pred_base_dir):
         # generate for SMILES_frag
         frag_smiles_all.append(line[2])
         # generate for SMILES_pred
-        pred_mol = open(os.path.join(pred_base_dir,'smiles_'+sys+'.csv')).readlines()[i]
-        pred_smiles_all.append(Chem.MolToSmiles(pred_mol))
+        pred_smiles_all.append(open(os.path.join(pred_base_dir,'smiles_'+sys+'.csv')).readlines()[i])
     print(true_smiles_all)
     print(frag_smiles_all)
     print(pred_smiles_all)
