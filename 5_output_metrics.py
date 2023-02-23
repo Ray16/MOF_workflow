@@ -6,6 +6,7 @@ import subprocess
 true_base_dir = 'data/fragments_all/'
 pred_base_dir = 'output/'
 
+# WIP: match true/pred/frag smiles - specifically pred does not match true/frag
 os.makedirs('metrics',exist_ok=True)
 for sys in os.listdir(pred_base_dir):
     if 'smiles' not in sys:
@@ -23,4 +24,5 @@ for sys in os.listdir(pred_base_dir):
         df = pd.DataFrame({'index':range(len(true_smiles_all)),'true_molecules':true_smiles_all,'pred_molecules':pred_smiles_all,'frag_molecules':frag_smiles_all})
         df = df[~df["pred_molecules"].str.contains('@')] # remove bad entries
         df.to_csv(f'metrics/{sys}.csv',index=False)
+        print(f'Generating metrics for linkers that correspond to node {sys} ...')
         subprocess.run(f'python -m evaluation.linkers --save_result --filename metrics/{sys}.csv', shell=True)

@@ -69,10 +69,12 @@ def generate_animation(ddpm, chain_batch, node_mask,n_mol):
 
     batch_size = chain_batch.size(1) #Batch size
     batch_indices = torch.arange(batch_size)
-    mol_indices = batch_indices
-    for bi, mi in zip(batch_indices, mol_indices):
+    #mol_indices = batch_indices
+    #for bi, mi in zip(batch_indices, mol_indices):
+    for bi, mi in zip(batch_indices):
         chain = chain_batch[:, bi, :, :] #(FLD)
-        name = f'mol_{n_mol}_{mi}'
+        #name = f'mol_{n_mol}_{mi}'
+        name = f'mol_{n_mol}'
         chain_output = os.path.join(ddpm.samples_dir, name)
         os.makedirs(chain_output, exist_ok=True)
 
