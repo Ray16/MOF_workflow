@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from rdkit import Chem
+import subprocess
 
 true_base_dir = 'data/fragments_all/'
 pred_base_dir = 'output/'
@@ -21,3 +22,4 @@ for sys in os.listdir(pred_base_dir):
             pred_smiles_all.append(open(os.path.join(pred_base_dir,'smiles_'+sys+'.csv')).readlines()[i])
         df = pd.DataFrame({'true_molecules':true_smiles_all,'pred_molecules':pred_smiles_all,'frag_molecules':frag_smiles_all})
         df.to_csv(f'metrics/{sys}.csv',index=False)
+    subprocess.run([f'python -m evaluation.linkers --save_result --filename metrics/{sys}.csv'])
