@@ -522,7 +522,6 @@ if __name__ == "__main__":
             'pred_mol_smi': pred_mol,
             'frag_smi': frag_mol 
                 })
-    print(data)
 
     #####DEPRECATED#####
     # valid = []
@@ -543,17 +542,13 @@ if __name__ == "__main__":
     # print(pass_all, pass_SA, pass_RA, pass_PAINS, pass_NP, pass_SC)
     ####################
 
-    result = get_delinker_metrics_v2(data) #dict
-    if args.save_result:
+    df = pd.DataFrame(columns=['true_mol_smi','pred_mol_smi','frag_smi'])
+    for d in data:
+        result = get_delinker_metrics_v2(d) #dict
         df_line = pd.DataFrame([result])
-        if args.filename is None:
-            df.to_csv("linker_evaluation" + "_result" + ".csv")
-        else:
-            filename_root, ext = os.path.splitext(args.filename)
-            df.to_csv(filename_root + "_result" + ext)
-    else:
-        # print(cf.on_yellow(result))
-        print(result)
+    df = df.append(df_line)
+    filename_root, ext = os.path.splitext(args.filename)
+    df.to_csv(filename_root + "_result" + ext)
 
 
     #Validity, SA, RA, PAINS, NP, SC (only predictions), Novelty, Uniquenesss, rdkitScore, compute_recovery_rate (predictions, GT, fragments)
