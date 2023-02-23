@@ -543,8 +543,9 @@ if __name__ == "__main__":
     ####################
 
     result = get_delinker_metrics_v2(data) #dict
+    print(result)
     if args.save_result:
-        df = pd.DataFrame(result)
+        df_line = pd.DataFrame([result])
         if args.filename is None:
             df.to_csv("linker_evaluation" + "_result" + ".csv")
         else:
