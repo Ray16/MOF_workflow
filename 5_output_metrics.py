@@ -12,7 +12,7 @@ for sys in os.listdir(pred_base_dir):
     pred_smiles_all = []
     for i,linker in enumerate(os.listdir(os.path.join(pred_base_dir,sys))):
         # generate for SMILES_true
-        line = pd.read_csv(os.path.join(pred_base_dir,sys,'hMOF_table.csv')).iloc[i,:]
+        line = pd.read_csv(os.path.join(true_base_dir,sys,'hMOF_table.csv')).iloc[i,:]
         true_smiles_all.append(line[1])
         # generate for SMILES_frag
         frag_smiles_all.append(line[2])
