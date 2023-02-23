@@ -11,9 +11,9 @@ nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers')
 
 n_atoms = args.n_atoms
 print(f'Sampling {n_atoms} atoms ...')
-OUTPUT_DIR = f'output/n_atoms_{n_atoms}'
 for node in nodes:
     print(f'Now on node: {node}')
-    os.makedirs(os.path.join(OUTPUT_DIR,node),exist_ok=True)
+    OUTPUT_DIR = f'output/n_atoms_{n_atoms}/{node}'
+    os.makedirs(OUTPUT_DIR,exist_ok=True)
     subprocess.run(f'python -W ignore utils/difflinker_sample_and_analyze.py --linker_size {n_atoms} --fragments data/fragments_all/{node}/hMOF_frag.sdf --model models/geom_difflinker.ckpt --output {OUTPUT_DIR} --n_samples 1',shell=True)
     #subprocess.run(f'python -W ignore utils/difflinker_sample_and_analyze.py --linker_size models/geom_size_gnn.ckpt --fragments data/fragments_all/{node}/hMOF_frag.sdf --model models/geom_difflinker.ckpt --output {OUTPUT_DIR} --n_samples 1',shell=True) 
