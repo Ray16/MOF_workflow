@@ -13,9 +13,9 @@ for n_atoms in range(5,10):
     print(f'Now on n_atoms: {n_atoms} ...')
     for node in nodes:
         print(f'Now on node: {node}')
-        base_dir = f'output/{n_atoms}/{node}/'
-        xyz_H_dir = f'output_for_pormake/{n_atoms}/xyz_h/'
-        xyz_X_dir = f'output_for_pormake/{n_atoms}/xyz_X/'
+        base_dir = f'output/n_atoms_{n_atoms}/{node}/'
+        xyz_H_dir = f'output_for_pormake/n_atoms_{n_atoms}/xyz_h/'
+        xyz_X_dir = f'output_for_pormake/n_atoms_{n_atoms}/xyz_X/'
         if len(os.listdir(base_dir)) > 0: # results not empty
             print(f'Adding hydrogens ... ')
             # add Hs
@@ -32,7 +32,7 @@ for n_atoms in range(5,10):
                         if '@' not in result:
                             os.makedirs(os.path.join(xyz_H_dir,node),exist_ok=True)
                             # generate 3D coordinates (with hydrogens)
-                            target_xyz_path = f'output_for_pormake/xyz_h/{node}/mol_{mol_num}.xyz'
+                            target_xyz_path = f'output_for_pormake/n_atoms_{n_atoms}/xyz_h/{node}/mol_{mol_num}.xyz'
                             subprocess.run(f'obabel -:"{result}" --gen3D -O {target_xyz_path}', shell=True)
                             # remove invalid structures
                             info = ''.join(open(target_xyz_path).readlines())
@@ -41,7 +41,7 @@ for n_atoms in range(5,10):
                     except:
                         pass
 
-            with open(f'output/{n_atoms}/smiles_{node}.csv','w+') as f:
+            with open(f'output/n_atoms_{n_atoms}/smiles_{node}.csv','w+') as f:
                 for smi in smiles:
                     f.write(smi+'\n')
 
