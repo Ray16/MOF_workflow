@@ -11,7 +11,7 @@ nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers')
 
 #n_atoms = args.n_atoms
 for n_atoms in range(5,10):
-    print(f'Sampling {n_atoms} atoms ...')
+    print(f'Sampling {n_atoms} atoms...')
     for node in nodes:
         print(f'Now on node: {node}')
         OUTPUT_DIR = f'output/n_atoms_{n_atoms}/{node}'

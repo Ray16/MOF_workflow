@@ -18,18 +18,18 @@ for node in nodes:
     CORES='32'
     
     # generate sdf of molecular fragments
-    print('Generating molecular fragments ...')
+    print('Generating molecular fragments...')
     os.makedirs(TARGET_DIR,exist_ok=True)
     subprocess.run([f'python -W ignore utils/rdkit_conf_parallel.py {INPUT_SMILES} {OUTPUT_TEMPLATE} --cores {CORES}'],shell=True,stdout=PIPE,stderr=PIPE)
     for sdf in glob('*.sdf'):
         shutil.move(sdf,TARGET_DIR) 
     
     # generate sdf for frags and linkers
-    print(f'Generating sdf for frags and linkers ...')
+    print(f'Generating sdf for frags and linkers...')
     os.makedirs(OUT_DIR,exist_ok=True)
     subprocess.run(f'python -W ignore utils/prepare_dataset_parallel.py --table {INPUT_SMILES} --sdf-dir {TARGET_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --cores {CORES}',shell=True)
 
     # filter and merge fragments
-    print(f'Filtering and merging fragments ...')
+    print(f'Filtering and merging fragments...')
     subprocess.run(f'python -W ignore utils/filter_and_merge.py --in-dir {OUT_DIR} --out-dir {OUT_DIR} --template {OUTPUT_TEMPLATE} --number-of-files {CORES}',shell=True)
     

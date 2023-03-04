@@ -10,14 +10,14 @@ os.makedirs('output_for_pormake',exist_ok='True')
 nodes = [i.split('_')[1].split('.sdf')[0] for i in os.listdir('data/conformers') if 'conformers' in i]
 
 for n_atoms in range(5,10):
-    print(f'Now on n_atoms: {n_atoms} ...')
+    print(f'Now on n_atoms: {n_atoms}')
     for node in nodes:
         print(f'Now on node: {node}')
         base_dir = f'output/n_atoms_{n_atoms}/{node}/'
         xyz_H_dir = f'output_for_pormake/n_atoms_{n_atoms}/xyz_h/'
         xyz_X_dir = f'output_for_pormake/n_atoms_{n_atoms}/xyz_X/'
         if len(os.listdir(base_dir)) > 0: # results not empty
-            print(f'Adding hydrogens ... ')
+            print(f'Adding hydrogen atoms...')
             # add Hs
             smiles = []
             for file in os.listdir(base_dir):
@@ -45,7 +45,7 @@ for n_atoms in range(5,10):
                 for smi in smiles:
                     f.write(smi+'\n')
 
-            print(f'Adding connection points ... ')
+            print(f'Adding connection points... ')
             # add Xs - atoms that are furthest part
             for file in os.listdir(os.path.join(xyz_H_dir,node)):
                 if not file.startswith('.'):

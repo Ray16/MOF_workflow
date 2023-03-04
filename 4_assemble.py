@@ -7,7 +7,7 @@ from tqdm import tqdm
 import timeout_decorator
 
 for n_atoms in range(5,10):
-    print(f'Now on n_atoms: {n_atoms} ...')
+    print(f'Now on n_atoms: {n_atoms}')
     linkers_dir = f'output_for_pormake/n_atoms_{n_atoms}/xyz_X'
     nodes = [i.split('.')[0] for i in os.listdir(linkers_dir)]
     parent_dir = os.path.dirname(os.path.realpath(__file__))
