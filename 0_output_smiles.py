@@ -1,5 +1,4 @@
 import os
-import ast
 import subprocess
 import itertools
 from tqdm import tqdm
@@ -62,21 +61,23 @@ for node in unique_node_select:
     node_name = node.replace('[','').replace(']','').replace('(','').replace(')','')
     print(f'Now on node {node_name} ... ')
     input_data_path = f'data/data_by_node/{node_name}.csv' 
-    output_data_path = f'data/data_high_wc/{node_name}.csv'
+    output_data_path = f'data/data_3_linkers/{node_name}.csv'
+    high_wc_output_data_path = f'data/data_high_wc/{node_name}.csv'
 
     df = pd.read_csv(input_data_path)
 
-    # select entries with high working capactiy at (wc > 2mmol/g @ 0.1 bar)
-    df_high_wc = df[df['CO2_wc_01'] >=2]
-
     # select entries with three linkers
-    len_linkers = [len(ast.literal_eval(df_high_wc['organic_linker'].iloc[i])) for i in range(len(df_high_wc['organic_linker']))]
-    df_high_wc['len_linkers'] = len_linkers
-    df_high_wc_select = df_high_wc[df_high_wc.len_linkers==3]
-    df_high_wc_select.to_csv(output_data_path,index=False)
+    len_linkers = [len(ast.literal_eval(df['organic_linker'].iloc[i])) for i in range(len(df['organic_linker']))]
+    df['len_linkers'] = df
+    df_select = df[df.len_linkers==3]
+    df_select.to_csv(output_data_path,index=False)
+
+    # select entries with high working capactiy at (wc > 2mmol/g @ 0.1 bar)
+    df_high_wc = df_select[df_select['CO2_wc_01'] >=2]
+    df_high_wc.to_csv(high_wc_output_data_path,index=False)
 
     # get list of SMILES for all linkers
-    list_smiles = [ast.literal_eval(i) for i in df_high_wc_select['organic_linker']]
+    list_smiles = [eval(i) for i in df_high_wc['organic_linker']]
     all_smiles = list(itertools.chain(*list_smiles))
     print(f'number of smiles: {len(all_smiles)}')
     all_smiles_unique = list(pd.Series(all_smiles).unique())
