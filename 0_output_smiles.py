@@ -68,7 +68,7 @@ for node in unique_node_select:
     df = pd.read_csv(input_data_path)
 
     # select entries with three linkers
-    len_linkers = [len(ast.literal_eval(df['organic_linker'].iloc[i])) for i in range(len(df['organic_linker']))]
+    len_linkers = [len(eval(df['organic_linker'].iloc[i])) for i in range(len(df['organic_linker']))]
     df['len_linkers'] = df
     df_select = df[df.len_linkers==3]
     df_select.to_csv(output_data_path,index=False)
