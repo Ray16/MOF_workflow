@@ -47,6 +47,7 @@ df_info_select = df_info[df_info['metal_node'].isin(unique_node_select)] # selec
 # create necessary folders
 os.makedirs(f'data/conformers',exist_ok=True)
 os.makedirs(f'data/data_by_node',exist_ok=True)
+os.makedirs(f'data/data_3_linkers',exist_ok=True)
 os.makedirs(f'data/data_high_wc',exist_ok=True)
 os.makedirs(f'data/fragments_smi',exist_ok=True)
 
