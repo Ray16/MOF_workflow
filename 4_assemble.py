@@ -14,7 +14,7 @@ for n_atoms in range(5,10):
 
 
     @timeout_decorator.timeout(5)
-    def gen_mof(node,linker,tpo):
+    def gen_mof_1(node,linker,tpo):
 
         builder = pm.Builder()
         database = pm.Database()
@@ -31,7 +31,31 @@ for n_atoms in range(5,10):
                 cif_name = tpo+'_'+node+'_'+linker+'_n_atoms_'+n_atoms+'.cif'
                 print(f'Generated {cif_name}')
                 MOF.write_cif(os.path.join(mof_dir,cif_name))
-        
+
+    @timeout_decorator.timeout(5)
+    def gen_mof_3(node,linker1,linker2,linker3,tpo):
+
+        builder = pm.Builder()
+        database = pm.Database()
+
+        T = database.get_topo(tpo)
+        N = database.get_bb(node)
+        L1 = database.get_bb(linker1)
+        L2 = database.get_bb(linker2)
+        L3 = database.get_bb(linker3)
+
+        node_bbs = {0: N}
+
+        edge_bbs = {(0, 0): L1}
+
+        if node+'_'+linker+'.cif' not in os.listdir(mof_dir):
+                bbs = builder.make_bbs_by_type(topology=T, node_bbs=node_bbs, edge_bbs=edge_bbs)
+                bbs[2] = L2
+                bbs[3] = L3
+                MOF = builder.build(topology=T, bbs = bbs)
+                cif_name = tpo+'_'+node+'_'+linker1+'_'+linker2+'_'+linker3+'_n_atoms_'+n_atoms+'.cif'
+                print(f'Generated {cif_name}')
+                MOF.write_cif(os.path.join(mof_dir,cif_name))
 
     if __name__ == '__main__':
         os.makedirs('MOFs',exist_ok=True)
@@ -62,8 +86,27 @@ for n_atoms in range(5,10):
 
                 # generate MOF
                 linker_names = [i.split('.')[0] for i in os.listdir(os.path.join(linkers_dir,node)) if 'E_' in i]
+                # 1_node_1_linker
+                '''
+                print(f'Generating MOFs with one type of linker...')
                 for l in tqdm(linker_names):
-                    gen_mof(node,l,'pcu')
+                    gen_mof_1(node,l,'pcu')
+                '''
+
+                # 1_node_2_linkers
+                '''
+                print(f'Generating MOFs with two types of linkers...')
+                for l1 in tqdm(linker_names):
+                    for l2 in linker_names:
+                        gen_mof_2(node,l1,l2,'pcu')
+                '''
+                
+                # 1_node_3_linkers
+                print(f'Generating MOFs with node three types of linkers...')
+                for l1 in tqdm(linker_names):
+                    for l2 in linker_names:
+                        for l3 in linker_names:
+                            gen_mof_3(node,l1,l2,l3,'pcu')
 
                 # remove sbus from PORMAKE template folder
                 shutil.rmtree(os.path.join(pormake_dir,'pormake','database','bbs'))
