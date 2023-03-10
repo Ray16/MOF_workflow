@@ -73,7 +73,7 @@ for node in unique_node_select:
 
     # select entries with high working capacity and three linkers
     len_linkers = [len(eval(df_high_wc['organic_linker'].iloc[i])) for i in range(len(df_high_wc['organic_linker']))]
-    df['len_linkers'] = len_linkers
+    df_high_wc['len_linkers'] = len_linkers
     df_select = df_high_wc[df_high_wc.len_linkers==3]
     df_select.to_csv(output_data_path,index=False)
 
