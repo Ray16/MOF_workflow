@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import random
 import importlib
 from tqdm import tqdm
 
@@ -103,10 +104,11 @@ for n_atoms in range(5,10):
                 
                 # 1_node_3_linkers
                 print(f'Generating MOFs with node three types of linkers...')
-                for l1 in tqdm(linker_names):
-                    for l2 in linker_names:
-                        for l3 in linker_names:
-                            gen_mof_3(node,l1,l2,l3,'pcu')
+                for i in range(100):
+                    l1 = random.choice(linker_names)
+                    l2 = random.choice(linker_names)
+                    l3 = random.choice(linker_names)
+                    gen_mof_3(node,l1,l2,l3,'pcu')
 
                 # remove sbus from PORMAKE template folder
                 shutil.rmtree(os.path.join(pormake_dir,'pormake','database','bbs'))
