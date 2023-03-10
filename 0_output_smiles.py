@@ -62,21 +62,28 @@ for node in unique_node_select:
     node_name = node.replace('[','').replace(']','').replace('(','').replace(')','')
     print(f'Now on node {node_name} ... ')
     input_data_path = f'data/data_by_node/{node_name}.csv' 
-    output_data_path = f'data/data_3_linkers/{node_name}.csv'
-    high_wc_output_data_path = f'data/data_high_wc/{node_name}.csv'
+    three_linkers_data_path = f'data/three_linkers/{node_name}.csv'
+    high_wc_data_path = f'data/data_high_wc/{node_name}.csv'
+    high_wc_3_linkers_data_path = f'data/data_high_wc_three_linkers/{node_name}.csv'
 
     df = pd.read_csv(input_data_path)
 
-    # select entries with high working capactiy at (wc > 2mmol/g @ 0.1 bar)
-    df_high_wc = df[df['CO2_wc_01'] >=2]
-    df_high_wc.to_csv(high_wc_output_data_path,index=False)
+    # MOFs with three linkers
+    len_linkers = [len(eval(df['organic_linker'].iloc[i])) for i in range(len(df['organic_linker']))]
+    df['len_linkers'] = len_linkers
+    df_three_linkers = df[df.len_linkers==3]
+    df_three_linkers.to_csv(three_linkers_data_path,index=False)
 
-    # select entries with high working capacity and three linkers
+    # MOFs with high working capactiy at (wc > 2mmol/g @ 0.1 bar)
+    df_high_wc = df[df['CO2_wc_01'] >=2]
+    df_high_wc.to_csv(high_wc_data_path,index=False)
+
+    # MOFs with high working capacity and three linkers
     len_linkers = [len(eval(df_high_wc['organic_linker'].iloc[i])) for i in range(len(df_high_wc['organic_linker']))]
     df_high_wc['len_linkers'] = len_linkers
-    df_select = df_high_wc[df_high_wc.len_linkers==3]
-    df_select.to_csv(output_data_path,index=False)
-
+    df_high_wc_3_linkers = df_high_wc[df_high_wc.len_linkers==3]
+    df_high_wc_3_linkers.to_csv(high_wc_3_linkers_data_path,index=False)
+    '''
     # get list of SMILES for all linkers
     list_smiles = [eval(i) for i in df_high_wc['organic_linker']]
     all_smiles = list(itertools.chain(*list_smiles))
@@ -102,3 +109,4 @@ for node in unique_node_select:
     # generate SMILES
     print('Generating SMILES ... ')
     subprocess.run(f'python utils/prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node_name}.sdf --output_path data/fragments_smi/frag_{node_name}.txt --verbose',shell=True)
+    '''
