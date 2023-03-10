@@ -28,7 +28,7 @@ for n_atoms in range(5,10):
         edge_bbs = {(0, 0): L}
         if node+'_'+linker+'.cif' not in os.listdir(mof_dir):
                 MOF = builder.build_by_type(topology=T, node_bbs=node_bbs, edge_bbs=edge_bbs)
-                cif_name = tpo+'_'+node+'_'+linker+'_n_atoms_'+n_atoms+'.cif'
+                cif_name = tpo+'_'+node+'_'+linker+'_n_atoms_'+str(n_atoms)+'.cif'
                 print(f'Generated {cif_name}')
                 MOF.write_cif(os.path.join(mof_dir,cif_name))
 
@@ -53,7 +53,7 @@ for n_atoms in range(5,10):
                 bbs[2] = L2
                 bbs[3] = L3
                 MOF = builder.build(topology=T, bbs = bbs)
-                cif_name = tpo+'_'+node+'_'+linker1+'_'+linker2+'_'+linker3+'_n_atoms_'+n_atoms+'.cif'
+                cif_name = tpo+'_'+node+'_'+linker1+'_'+linker2+'_'+linker3+'_n_atoms_'+str(n_atoms)+'.cif'
                 print(f'Generated {cif_name}')
                 MOF.write_cif(os.path.join(mof_dir,cif_name))
 
