@@ -67,15 +67,15 @@ for node in unique_node_select:
 
     df = pd.read_csv(input_data_path)
 
-    # select entries with three linkers
-    len_linkers = [len(eval(df['organic_linker'].iloc[i])) for i in range(len(df['organic_linker']))]
-    df['len_linkers'] = len_linkers
-    df_select = df[df.len_linkers==3]
-    df_select.to_csv(output_data_path,index=False)
-
     # select entries with high working capactiy at (wc > 2mmol/g @ 0.1 bar)
-    df_high_wc = df_select[df_select['CO2_wc_01'] >=2]
+    df_high_wc = df[df['CO2_wc_01'] >=2]
     df_high_wc.to_csv(high_wc_output_data_path,index=False)
+
+    # select entries with high working capacity and three linkers
+    len_linkers = [len(eval(df_high_wc['organic_linker'].iloc[i])) for i in range(len(df_high_wc['organic_linker']))]
+    df['len_linkers'] = len_linkers
+    df_select = df_high_wc[df_high_wc.len_linkers==3]
+    df_select.to_csv(output_data_path,index=False)
 
     # get list of SMILES for all linkers
     list_smiles = [eval(i) for i in df_high_wc['organic_linker']]
