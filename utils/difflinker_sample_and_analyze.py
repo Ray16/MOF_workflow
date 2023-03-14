@@ -65,16 +65,16 @@ def read_molecules(path):
 
 
 def generate_animation(ddpm, chain_batch, node_mask,n_mol):
-    # batch_indices, mol_indices = utils.get_batch_idx_for_animation(self.batch_size, batch_i)
+    #batch_indices, mol_indices = utils.get_batch_idx_for_animation(self.batch_size, batch_i)
 
     batch_size = chain_batch.size(1) #Batch size
     batch_indices = torch.arange(batch_size)
-    #mol_indices = batch_indices
+    mol_indices = batch_indices
     #for bi, mi in zip(batch_indices, mol_indices):
     for bi, mi in zip(batch_indices):
         chain = chain_batch[:, bi, :, :] #(FLD)
-        #name = f'mol_{n_mol}_{mi}'
-        name = f'mol_{n_mol}'
+        name = f'mol_{n_mol}_{mi}'
+        #name = f'mol_{n_mol}'
         chain_output = os.path.join(ddpm.samples_dir, name)
         os.makedirs(chain_output, exist_ok=True)
 
@@ -178,7 +178,7 @@ def main(input_path, model, output_dir, n_samples, n_steps, linker_size, anchors
 
             offset_idx = batch_i * batch_size
             #names = [f'output_{offset_idx+i}_{name}' for i in range(batch_size)]
-            names = [f'mol_{n_mol}' for i in range(batch_size)]
+            names = [f'mol_{n_mol}_{i}' for i in range(batch_size)]
             save_xyz_file(output_dir, h, x, node_mask, names=names, is_geom=ddpm.is_geom, suffix='')
 
             # for i in range(batch_size):
