@@ -24,6 +24,7 @@ for n_atoms in range(5,10):
                 if not file.startswith('.'):
                     try:
                         mol_num = file.split('_')[1]
+                        sample_num = file.split('_')[2]
                         # generate smile strings
                         result = subprocess.run(f'obabel {os.path.join(base_dir,file)} -osmi', shell=True, stdout=PIPE, stderr=PIPE, universal_newlines=True).stdout.split()[0]
                         # remove square brackets
@@ -32,7 +33,7 @@ for n_atoms in range(5,10):
                         if '@' not in result:
                             os.makedirs(os.path.join(xyz_H_dir,node),exist_ok=True)
                             # generate 3D coordinates (with hydrogens)
-                            target_xyz_path = f'output_for_pormake/n_atoms_{n_atoms}/xyz_h/{node}/mol_{mol_num}.xyz'
+                            target_xyz_path = f'output_for_pormake/n_atoms_{n_atoms}/xyz_h/{node}/mol_{mol_num}_{sample_num}.xyz'
                             subprocess.run(f'obabel -:"{result}" --gen3D -O {target_xyz_path}', shell=True)
                             # remove invalid structures
                             info = ''.join(open(target_xyz_path).readlines())
