@@ -84,7 +84,7 @@ for node in unique_node_select:
     df_high_wc['len_linkers'] = len_linkers
     df_high_wc_3_linkers = df_high_wc[df_high_wc.len_linkers==3]
     df_high_wc_3_linkers.to_csv(high_wc_3_linkers_data_path,index=False)
-    '''
+
     # get list of SMILES for all linkers
     list_smiles = [eval(i) for i in df_high_wc['organic_linker']]
     all_smiles = list(itertools.chain(*list_smiles))
@@ -110,4 +110,3 @@ for node in unique_node_select:
     # generate SMILES
     print('Generating SMILES ... ')
     subprocess.run(f'python utils/prepare_data_from_sdf.py --sdf_path data/conformers/conformers_{node_name}.sdf --output_path data/fragments_smi/frag_{node_name}.txt --verbose',shell=True)
-    '''
